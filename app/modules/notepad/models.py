@@ -11,4 +11,4 @@ class Notepad(db.Model):
     user = db.relationship('User', backref='notepads', lazy=True)
 
     def __repr__(self):
-        return f'Notepad<{self.id}, Title={self.title}, Author={self.user.name}>'
+        return f'Notepad<{self.id}, Title={self.title}, Author={self.user.username}>'
