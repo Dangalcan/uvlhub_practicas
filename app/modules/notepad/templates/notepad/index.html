@@ -4,22 +4,29 @@
 
 {% block content %}
 
-{% if notepads %}
-    <ul>
-    {% for notepad in notepads %}
-        <li>
-            <strong><a href="{{ url_for('notepad.edit_notepad', notepad_id=notepad.id) }}">{{ notepad.title }}</a></strong> - {{ notepad.body }}
-            <a href="{{ url_for('notepad.edit_notepad', notepad_id=notepad.id) }}">Edit</a>
-            <form method="POST" action="{{ url_for('notepad.delete_notepad', notepad_id=notepad.id) }}">
-                {{ form.hidden_tag() }}
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>You have no notepads.</p>
-{% endif %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>My Notepads</h2>
+        <a href="{{ url_for('notepad.create_notepad') }}" class="btn btn-success">Create New Notepad</a> <!-- Botón para crear nuevos notepads -->
+    </div>
+    
+    {% if notepads %}
+        <ul>
+        {% for notepad in notepads %}
+            <li>
+                <strong><a href="{{ url_for('notepad.get_notepad', notepad_id=notepad.id) }}">{{ notepad.title }}</a></strong> - {{ notepad.body }}
+                <a href="{{ url_for('notepad.edit_notepad', notepad_id=notepad.id) }}" class="btn btn-primary">Edit</a>
+                <form method="POST" action="{{ url_for('notepad.delete_notepad', notepad_id=notepad.id) }}" style="display: inline;">
+                    {{ form.hidden_tag() }}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no notepads.</p>
+    {% endif %}
+</div>
 
 {% endblock %}
 

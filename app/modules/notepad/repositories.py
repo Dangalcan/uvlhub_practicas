@@ -8,3 +8,6 @@ class NotepadRepository(BaseRepository):
 
     def get_all_by_user(self, user_id):
         return Notepad.query.filter_by(user_id=user_id).all()
+
+    def get_notepad_by_id(self, notepad_id):
+        return Notepad.query.filter_by(id=notepad_id).first()

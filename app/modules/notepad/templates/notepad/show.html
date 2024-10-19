@@ -1,0 +1,21 @@
+{% extends "base_template.html" %}
+
+{% block title %}View Notepad: {{ notepad.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="notepad-title">{{ notepad.title }}</h2>
+    <p class="notepad-body">{{ notepad.body }}</p>
+    <div class="button-group">
+        <a href="{{ url_for('notepad.edit_notepad', notepad_id=notepad.id) }}" class="btn btn-primary">Edit</a>
+        <form method="POST" action="{{ url_for('notepad.delete_notepad', notepad_id=notepad.id) }}" style="display: inline;">
+            {{ form.hidden_tag() }}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('notepad.scripts') }}"></script>
+{% endblock %}

@@ -51,13 +51,14 @@ READ BY ID
 @notepad_bp.route('/notepad/<int:notepad_id>', methods=['GET'])
 @login_required
 def get_notepad(notepad_id):
-    notepad = notepad_service.get_or_404(notepad_id)
-    
+    notepad = notepad_service.get_notepad_by_id(notepad_id)
+
     if notepad.user_id != current_user.id:
         flash('You are not authorized to view this notepad', 'error')
         return redirect(url_for('notepad.index'))
 
-    return render_template('notepad/show.html', notepad=notepad)
+    form = NotepadForm(obj=notepad)
+    return render_template('notepad/show.html', notepad=notepad, form=form)
 
 
 '''
